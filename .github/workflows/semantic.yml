@@ -1,0 +1,43 @@
+name: Semantic Versioning
+on:
+  push:
+    branches:
+      # Change this if your primary branch is not main
+      - main
+      - develop
+      - test
+    paths-ignore:
+      - .gitignore
+      - README.md
+      - LICENSE
+      - .versionning.yaml
+      - CHANGELOG.md
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    environment:
+      name: o-do-p #your environment name
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v4
+        id: semantic
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Write new version on file
+        run: |
+          touch .versionning.yaml
+          echo "APP_VERSION: ${{ steps.semantic.outputs.new_release_version }}" > .versionning.yaml
+          echo "APP_BRANCH: ${GITHUB_REF##*/}" >> .versionning.yaml
+          git config --local user.name actions-user
+          
+          git config --local user.email "actions@github.com"
+          git add .versionning.yaml
+          git commit -am "GH Action   Files added    $(date)"
+          git remote set-url origin https://theo-htech:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}
+          git push -f origin ${GITHUB_REF##*/}

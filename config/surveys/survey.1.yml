@@ -1,0 +1,56 @@
+config:
+  rating_limit:
+    low: 0
+    high: 9
+    step: 0.1
+  color:
+    low: red
+    mid: orange
+    high: lightgreen
+  limit:
+    low: 7
+    mid: 8.5
+
+bloc_1:
+  title: 'PRÉREQUIS'
+  q_1: 'Pensez-vous que les objectifs de votre équipe sont clairs pour tous les membres ?'
+  q_2: 'À quel point est-il essentiel, que vous travailliez en équipe pour atteindre les objectifs fixés ?'
+  q_3: 'Dans quelle mesure, sentez-vous que chaque membre de votre équipe respecte les autres membres ?'
+  q_4: 'À quel point, pensez-vous que la répartition des tâches au sein de votre équipe est équitable ?'
+  q_5: 'Votre équipe encourage-t-elle un environnement où chacun se sent en sécurité pour exprimer ses idées ou ses préoccupations ?'
+  q_6: "Votre équipe prend-elle le temps de réfléchir collectivement sur ses actions et ses résultats afin de s'améliorer continuellement ?"
+bloc_2:
+  title: "COHESION"
+  q_1: 'Faites-vous confiance à vos collègues pour accomplir efficacement leurs tâches ?'
+  q_2: 'Pensez-vous que vos collègues agissent avec bienveillance et considération envers les autres ?'
+  q_3: 'Vous sentez-vous encouragé par votre équipe à poursuivre votre développement personnel et professionnel ?'
+  q_4: 'Pensez-vous que vos collègues sont disposés à reconnaître leurs erreurs et à apprendre de celles-ci ?'
+  q_5: "Êtes-vous disposé à aider vos collègues lorsqu'ils sont confrontés à des difficultés ou des défis ?"
+  q_6: 'Vous sentez-vous intégré et accepté par votre équipe ?'
+  q_7: 'Votre équipe est-elle ouverte et réceptive aux commentaires constructifs ?'
+bloc_3:
+  title: "SATISFACTION"
+  q_1: "Avez-vous reçu suffisamment de formations pour effectuer efficacement votre travail ?"
+  q_2: "Disposez-vous des ressources et des outils nécessaires pour accomplir votre travail de manière efficace ?"
+  q_3: "Avez-vous l'impression qu'il y a des opportunités de croissance et de promotion au sein de votre équipe ?"
+  q_4: "Êtes-vous satisfait de votre compensation financière pour votre travail ?"
+  q_5: "Ressentez-vous que votre travail est apprécié et reconnu par votre supérieur hiérarchique ?"
+  q_6: "Vous sentez-vous compétent et à l'aise avec vos responsabilités de travail ?"
+  q_7: "Avez-vous l'impression d'avoir des relations sociales et des interactions significatives avec votre équipe ?"
+  q_8: "Votre travail a-t-il un sens et un but clair pour vous ?"
+  q_9: "Avez-vous suffisamment de liberté et de flexibilité pour accomplir votre travail comme vous le jugez bon ?"
+  q_10: "Considérez-vous votre charge de travail comme gérable et équilibrée ?"
+  q_11: "Êtes-vous engagé et passionné par votre travail ?"
+  q_12: "Êtes-vous satisfait de votre bien-être au travail ?"
+bloc_4:
+  title: "PERFORMANCE"
+  q_1: "Les objectifs de votre équipe restent-ils cohérents et stables sur de longues périodes ?"
+  q_2: "Ressentez-vous un alignement fort et une adhésion aux objectifs de l'équipe par tous ses membres ?"
+  q_3: "Ressentez-vous que les objectifs de l'équipe sont réalistes et atteignables ?"
+  q_4: "L'équipe est-elle capable de gérer efficacement l'incertitude et les changements imprévus ?"
+  q_5: "Comment évaluez-vous la collaboration de votre équipe avec d'autres équipes et partenaires ?"
+  q_6: "Pensez-vous que votre équipe fait preuve de créativité pour résoudre les problèmes et répondre aux défis ?"
+  q_7: "Estimez-vous que votre équipe comprend bien son environnement de travail et les facteurs qui peuvent affecter sa performance ?"
+  q_8: "À quel point estimez-vous que votre équipe est innovante dans ses approches et ses solutions ?"
+  q_9: "À quel point votre équipe est-elle efficace pour atteindre ses objectifs fixés ?"
+

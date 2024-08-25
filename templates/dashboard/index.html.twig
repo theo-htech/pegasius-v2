@@ -1,0 +1,87 @@
+{% extends 'secure_base.html.twig' %}
+
+{% block title %}{{ parent() }} - Dashboard{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var inputFieldHTML = '<div class="row mb-2 inputFieldRow"><div class="col"><input type="text" class="form-control" name="field[]" placeholder="Champ dynamique"></div></div>';
+
+            $("#addInputField").click(function() {
+                $("#inputFieldContainer").append(inputFieldHTML);
+            });
+        });
+    </script>
+    <div class="container-fluid mt-lg-5 pt-2">
+        <div class="row">
+            <!-- Left Panel (Table) -->
+            <div class="col-md-7 pt-2">
+                <div class="d-flex justify-content-between">
+                    <h3>{{ 'dashboard.survey_tab.title' | trans }}</h3>
+                    <div>
+                        {% include 'dashboard/_form_create_survey.html.twig' %}
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">{{ 'dashboard.survey_tab.tab_header.title' | trans }}</th>
+                        <th scope="col">{{ 'dashboard.survey_tab.tab_header.date' | trans }}</th>
+                        {% if app.user.isAdmin %}
+                            <th scope="col">{{ 'dashboard.survey_tab.tab_header.created_by' | trans }}</th>
+                        {% endif %}
+                        <th scope="col">{{ 'dashboard.survey_tab.tab_header.rate' | trans }}</th>
+                        <th scope="col">{{ 'dashboard.survey_tab.tab_header.status' | trans }}</th>
+                        <th scope="col">{{ 'dashboard.survey_tab.tab_header.actions' | trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for survey in surveys %}
+                        <tr>
+                            <th scope="row">{{ survey.title }}</th>
+                            <td>{{ survey.createdAt | date('d/m/Y H:m:s' ) }}</td>
+                            {% if app.user.isAdmin %}
+                                <td>{{ user_display(survey.creator) }}</td>
+                            {% endif %}
+                            <td>{{survey.pourcentFillUp}} %</td>
+                            <td>
+                                <div class="{{ status_class_tab(survey.status) }}">{{ status_trans(survey.status) }}</div>
+                            </td>
+                            {% if app.user.isAdmin or (survey.status != constant('App\\Entity\\Survey::STATUS_NEW') and  survey.status != constant('App\\Entity\\Survey::STATUS_CANCEL')) %}
+                                <td><a href="{{ path('app_survey_show', {'id' : survey.id}) }}"
+                                       class="btn btn-primary">{{ 'dashboard.survey_tab.tab_header.action.see' | trans }}</a>
+                                </td>
+                             {% elseif app.user.email == survey.creator.email and survey.status == constant('App\\Entity\\Survey::STATUS_NEW') %}
+                                 <td><a href="{{ path('app_survey_cancel', {'id' : survey.id}) }}"
+                                        class="btn btn-primary btn-danger">{{ 'dashboard.survey_tab.tab_header.action.cancel' | trans }}</a>
+                                 </td>
+                             {% else %}
+                                 <td></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    <!-- More rows can be added here. Remember to use loops for dynamic data -->
+                    </tbody>
+                </table>
+                <!-- The table can be filled with dynamic data from your database -->
+            </div>
+
+            <!-- Right Panel (Statistics) -->
+            <div class="col-md-5">
+                <h3 class="text-center mt-3">Statistics</h3>
+                <!-- Example of statistic card -->
+                <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                    <div class="card-header">Header</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Primary card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title... </p>
+                    </div>
+                </div>
+                <!-- More statistic cards can be added here -->
+                <!-- card classes: .bg-primary, .bg-secondary, .bg-success, .bg-danger, .bg-warning, .bg-info, .bg-light, .bg-dark -->
+            </div>
+        </div>
+    </div>
+{% endblock %}

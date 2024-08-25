@@ -1,0 +1,26 @@
+{% extends 'pdf/template.html.twig' %}
+
+
+{% block pdf_title %}
+    {{ 'pdf.result.client.title' | trans }} {{ survey.title }}
+{% endblock %}
+
+{% block pdf_header %}
+    <h2>{{ 'pdf.result.client.title' | trans }}</h2>
+    <h3>{{ survey.title }}</h3>
+    <h5>{{ 'pdf.result.client.header.date' | trans }}{{ survey.createdAt | date('d/m/Y') }}</h5>
+    <br>
+    <br>
+    <h4>{{ user_display(survey.creator) }}</h4>
+    {% if survey.creator.logo is not null %}
+        <img src="{{ survey.creator.logo }}"
+             style="width: 500px;" alt="logo">
+    {% endif %}
+{% endblock %}
+
+{% block pdf_content %}
+    {% include "pdf/result/intro.html.twig" %}
+    {% include "pdf/result/legend.html.twig" %}
+    {% include "pdf/result/global.html.twig" %}
+    {% include "pdf/result/detail.html.twig" %}
+{% endblock %}

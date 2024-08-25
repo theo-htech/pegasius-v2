@@ -1,0 +1,153 @@
+{% extends 'secure_base.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'survey_show.title' | trans }}{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let maxFields = {{ survey.count }} - 1;
+            let inputFieldContainer = $("#inputFieldContainer");
+            let addButton = $("#addInputField");
+            let remainingRows = $("#remainingRows span");
+            let form = $("#dynaForm");
+
+
+            let inputFieldHTMLTemp = '<div class="row mb-2 inputFieldRow"><div class="col"><input type="email" class="form-control" name="data[$NUM][{{ constant('App\\Entity\\SurveyTarget::EMAIL') }}]" placeholder="{{ 'survey_show.cible_form.email' | trans }}" required> </div> <div class="col"> <select class="form-control form-select form-select-sm"  name="data[$NUM][{{ constant('App\\Entity\\SurveyTarget::TARGET_TYPE') }}]" aria-label=".form-select-sm example"> <option value="{{ constant('App\\Entity\\Poll::MANAGER') }}">{{ 'survey_show.cible_form.manager' | trans }}</option> <option value="{{ constant('App\\Entity\\Poll::SALARY') }}" selected>{{ 'survey_show.cible_form.salary' | trans }}</option></select></div></div>';
+            let fieldCount = 1; // initialise le compte du champ à 1 pour le champ existant.
+
+            $(addButton).click(function () {
+                if (fieldCount < maxFields) {  // Vérifie le nombre maximum de champs
+                    fieldCount++;  // ajoute un au nombre actuel de ligne
+                    let inputFieldHTML = inputFieldHTMLTemp.replaceAll('$NUM', fieldCount);
+                    remainingRows.text(maxFields - fieldCount);  // met à jour le nombre d'ajouts possible restant
+                    $(inputFieldContainer).append(inputFieldHTML);
+                }
+            });
+
+            form.on("submit", function (e) {
+                e.preventDefault();
+
+                // Vérifie si le formulaire est valide
+                if (this.checkValidity()) {
+                    // Affiche la modale de confirmation
+                    $("#confirmModal").modal('show');
+                }
+            });
+
+            // Soumet le formulaire si l'utilisateur confirme
+            $("#confirmSubmit").on('click', function () {
+                form.off("submit").submit();
+            });
+        });
+    </script>
+    <div class="container mt-xl-5 pt-2">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="text-center">{{ 'survey_show.title' | trans }} - {{ survey.title }}</h1>
+                <table class="table table-striped mt-5">
+                    <tbody>
+                    <tr>
+                        <th class="w-25">{{ 'survey_show.creator' | trans }}</th>
+                        <td>{{ user_display(survey.creator) }}</td>
+                    </tr>
+                    <tr>
+                        <th class="w-25">{{ 'survey_show.count' | trans }}</th>
+                        <td>{{ survey.count }}</td>
+                    </tr>
+                    <tr>
+                        <th class="w-25">{{ 'survey_show.status' | trans }}</th>
+                        <td>
+                            <div class="{{ status_class(survey.status) }}">{{ status_trans(survey.status) }}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="w-25">{{ 'survey_show.created_at' | trans }}</th>
+                        <td>{{ survey.createdAt ? survey.createdAt|date('d/m/Y H:m:s' ) : '' }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                {% if app.user.isAdmin and survey.status == constant('App\\Entity\\Survey::STATUS_NEW') %}
+                    <div class="btn-group">
+                        <a class="btn btn-primary"
+                           href="{{ path('app_admin_survey_confirm', {'id' : survey.id}) }}">{{ 'survey_show.accepted' | trans }}</a>
+                        <a class="btn btn-danger"
+                           href="{{ path('app_admin_survey_decline', {'id' : survey.id}) }}">{{ 'survey_show.refused' | trans }}</a>
+
+                    </div>
+                {% endif %}
+                {% if app.user.id == survey.creator.id and survey.status == constant('App\\Entity\\Survey::STATUS_CONFIRM') %}
+                <div class="container mt-lg-5">
+                    <div class="d-flex justify-content-between">
+                        <h3 class="mb-3">{{ 'survey_show.cible_form.title' | trans }}</h3>
+                        <button type="button" id="addInputField"
+                                class="btn btn-primary">{{ 'survey_show.cible_form.add_cible' | trans }}</button>
+                    </div>
+                    <form id="dynaForm" action="{{ path('app_survey_valid_target', {'id' : survey.id}) }}" method="POST"
+                          class="mt-lg-5">
+                        <div id="inputFieldContainer">
+                            <div class="row mb-2 inputFieldRow">
+                                <div class="col">
+                                    <input type="email" class="form-control"
+                                           name="data[1][{{ constant('App\\Entity\\SurveyTarget::EMAIL') }}]"
+                                           placeholder="{{ 'survey_show.cible_form.email' | trans }}" required value="{{ survey.creator.email }}">
+                                    <p></p>
+                                </div>
+                                <div class="col">
+                                    <select class="form-control form-select form-select-sm"
+                                            name="data[1][{{ constant('App\\Entity\\SurveyTarget::TARGET_TYPE') }}]"
+                                            aria-label=".form-select-sm example">
+                                        <option value="{{ constant('App\\Entity\\Poll::MANAGER') }}">{{ 'survey_show.cible_form.manager' | trans }}</option>
+                                        <option value="{{ constant('App\\Entity\\Poll::SALARY') }}">{{ 'survey_show.cible_form.salary' | trans }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <p id="remainingRows">{{ 'survey_show.cible_form.info_cible' | trans }}
+                            <span>{{ survey.count - 2 }}</span></p>
+                        <button type="submit" id="submitBtn" class="btn btn-success mt-2">Soumettre</button>
+                    </form>
+                    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title"
+                                        id="confirmModalLabel">{{ 'survey_show.cible_form.modal.title' | trans }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    {{ 'survey_show.cible_form.modal.question' | trans }}
+                                    <p class="alert-warning">{{ 'survey_show.cible_form.modal.warning' | trans }}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-bs-dismiss="modal" id="confirmSubmit"
+                                            class="btn btn-success">
+                                        {{ 'survey_show.cible_form.modal.yes' | trans }}</button>
+                                    <button type="button" class="btn btn-danger"
+                                            data-bs-dismiss="modal">{{ 'survey_show.cible_form.modal.no' | trans }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if survey.status != constant('App\\Entity\\Survey::STATUS_NEW') %}
+                    <div class="d-flex justify-content-center">
+                        <a href="{{ path('app_dashboard') }}"
+                           class="btn btn-primary me-3">{{ 'core.button.back' | trans }}</a>
+                        {% if pollToken is not null %}
+                            <a href="{{ path('app_secure_survey_answer', {'token': pollToken} ) }}"
+                               class="btn btn-secondary me-3">{{ 'survey_show.give_answer' | trans }}</a>
+                        {% endif %}
+                        {% if survey.pourcentFillUp >= 1 %}
+                        <a href="{{ path('app_survey_see_result', {'id' : survey.id}) }}" class="btn btn-primary me-3">{{ 'survey_show.see_result' | trans }}</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block pdf_title %}Default Title{% endblock %}</title>
+    <style>
+        @page {
+            margin: 0px;
+        }
+
+        body {
+            margin: 0px;
+            font-family: 'Helvetica';
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* pour laisser de l'espace entre la page de couverture et la 4ème de couverture */
+            height: 100vh;
+        }
+
+        .cover-page, .last-page, .cover-page-title {
+            text-align: center;
+            padding: 50px;
+            margin: auto;
+        }
+
+        .cover-page {
+            background-color:#077295;
+            color: white;
+        }
+
+        .last-page {
+            background-color: #077295;
+            color: white;
+            left: 0;
+            bottom: 0;
+            text-align: center;
+            padding: 33.1px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .page {
+            text-align: center;
+            padding: 50px;
+            margin: auto;
+        }
+
+        .table {
+            width: 100%;
+            margin: 1.5rem auto;
+            color: #212529;
+            border: 1px solid #dee2e6;
+            border-collapse: collapse;
+        }
+
+        .table th, .table td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border: 1px solid #dee2e6;
+        }
+
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #dee2e6;
+            text-align: center;
+        }
+
+        .table tbody tr td {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Page de couverture -->
+<div style="page-break-after: always;  width: 100%;">
+    <div class="cover-page">
+        <img src="https://i.ibb.co/dK8nH7Y/LEADERSHIP-PULSE.png"
+             style="" alt="logo">
+        <br>
+        <br>
+        <br> <br> <br>
+
+
+        <h1>O.do.P</h1>
+        <br>
+        <br>
+        <br> <br> <br>
+    </div>
+    <div class="cover-page-title">
+        {% block pdf_header %}{% endblock %}
+    </div>
+
+</div>
+
+<!-- Contenu du PDF -->
+{% block pdf_content %}{% endblock %}
+
+<!-- 4ème de couverture -->
+<div class="last-page">
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+    <div>
+        <p>© {{ "now" | date('Y') }} HORIZON TECH S.A.S. Tous les droits sont réservés.</p>
+        <p>Notre adresse : 78 Avenue des Champs Elysées, BUREAU 326, 75008 Paris, France</p>
+        <p>Contactez-nous : contact@horizon-tech.eu</p>
+    </div>
+</div>
+
+</body>
+</html>

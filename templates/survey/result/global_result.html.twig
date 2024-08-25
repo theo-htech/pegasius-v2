@@ -1,0 +1,39 @@
+<div>
+    <canvas id="myChart" ></canvas>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('myChart');
+    let label = "{{ get_bloc_titles() }}";
+    label = label.replace(/&#039;/g, "'");
+    labelArray = label.split(',');
+    let averageManagers = "{{ calculate_average(managerPoll) }}".split(',');
+    let averageSalarys = "{{ calculate_average(salaryPoll) }}".split(',');
+    new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: labelArray,
+            datasets: [{
+                label: 'Managers',
+                data: averageManagers,
+                fill: true,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgb(255, 99, 132)',
+                pointBackgroundColor: 'rgb(255, 99, 132)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgb(255, 99, 132)'
+            }, {
+                label: 'Equipers',
+                data: averageSalarys,
+                fill: true,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgb(54, 162, 235)',
+                pointBackgroundColor: 'rgb(54, 162, 235)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgb(54, 162, 235)'
+            }]
+        }
+    });
+</script>

@@ -1,0 +1,63 @@
+{% extends 'secure_base.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'survey_result.title' | trans }}{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <style>
+        .small-table {
+            font-size: 0.8rem;
+            width: 15%; /* Adjust as needed */
+        }
+
+        .small-table td,
+        .small-table th {
+            padding: 0.25rem;
+        }
+    </style>
+
+    <div class="container mt-xl-5 pt-2">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="text-center">{{ 'survey_result.title' | trans }} - {{ survey.title }} :
+                    <div class="{{ status_class_tab(survey.status) }}">{{ status_trans(survey.status) }}</div>
+                </h1>
+
+            </div>
+
+            {% if survey.status != constant('App\\Entity\\Survey::STATUS_OVER') %}
+                <h5 class="text-center">{{ 'survey_result.info_not_over' | trans }}</h5>
+            {% endif %}
+        </div>
+
+        <table class="table table-striped mt-5 mb-lg-5 small-table">
+            <thead>
+            <tr>
+                <th>Etat</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td style="background: red">Niveau Dysfonctionnel < 7</td>
+            </tr>
+            <tr>
+                <td style="background: orange">7 < Niveau Fonctionnel < 8,5
+                </td>
+            </tr>
+            <tr>
+                <td style="background: lightgreen">Niveau Optimal > 8,5
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        {% include 'survey/result/global_result.html.twig' %}
+        {% include 'survey/result/detail_result.html.twig' %}
+        <div class="d-flex justify-content-center mt-lg-5">
+            <a href="{{ path('app_survey_show', {'id' : survey.id}) }}"
+               class="btn btn-primary me-3">{{ 'core.button.back' | trans }}</a>
+            <a href="{{ path('app_survey_see_result_pdf', {'id' : survey.id}) }}" class="btn btn-primary me-3">
+                PDF
+            </a>
+        </div>
+    </div>
+{% endblock %}

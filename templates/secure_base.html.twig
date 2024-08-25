@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ path('app_dashboard') }}">{{ 'core.title' | trans }}</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                </ul>
+{#                {% if app.user.logo is not null %}#}
+{#                    <img width="90px" height="30px" src="{{ app.user.logo }}" alt="Logo from user company" style="position:relative" class="me-lg-5 m-auto">#}
+{#                {% endif  %}#}
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ user_display(app.user) }}
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ path('app_user_show', { 'id' : app.user.id }) }}">{{ 'secure_base.profile' | trans }}</a></li>
+                        {% if app.user.isAdmin %}
+                            <li><a class="dropdown-item" href="{{ path('sonata_admin_dashboard') }}">{{ 'secure_base.admin' | trans }}</a></li>
+                        {% endif %}
+                        <li><a class="dropdown-item" href="{{ path('app_logout') }}">{{ 'secure_base.logout' | trans }}</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+{% endblock %}

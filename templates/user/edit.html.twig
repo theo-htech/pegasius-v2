@@ -1,0 +1,64 @@
+{% extends 'secure_base.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'edit_user.title' | trans }}{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+
+    <div class="container mt-xxl-5 pt-lg-4">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="text-center">{{ 'edit_user.title' | trans }}</h1>
+                <form method="post" class="mt-lg-5">
+                    {{ form_start(form) }}
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">{{ form_label(form.email, 'show_user.email') }}</label>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'required' : 'true' }}) }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">{{ form_label(form.firstName, 'show_user.first_name') }}</label>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.firstName, {'attr': {'class': 'form-control', 'required' : 'true'}}) }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">{{ form_label(form.lastName, 'show_user.last_name') }}</label>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.lastName, {'attr': {'class': 'form-control', 'required' : 'true'}}) }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">{{ form_label(form.companyName, 'show_user.company_name') }}</label>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.companyName, {'attr': {'class': 'form-control', 'required' : 'true'}}) }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">{{ form_label(form.logo, 'edit_user.logo_url') }}</label>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.logo, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    {% if app.user.isAdmin == false %}
+                    <div class="mb-3 row">
+                        {{ form_label(form.adminCanSee, 'edit_user.access_admin', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                {{ form_widget(form.adminCanSee, {'attr': {'class': 'form-check-input'}}) }}
+                            </div>
+                            <small class="form-text text-muted">{{ 'edit_user.access_admin_info' | trans }}</small>
+                        </div>
+                    </div>
+                    {% endif  %}
+                    <div class="mt-xxl-5 mb-3">
+                        <a href="{{ path('app_user_show', {'id' : app.user.id}) }}" class="btn btn-primary me-3">{{ 'core.button.back' | trans }}</a>
+                        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                    </div>
+                    {{ form_end(form) }}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

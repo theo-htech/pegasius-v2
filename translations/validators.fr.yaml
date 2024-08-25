@@ -1,0 +1,5 @@
+register:
+  password_diff: Les deux mots de passe sont différents
+  email_in_use: Un compte avec cet email existe déjà
+  term: Vous devez accepter les conditions d'utilisations
+  password_length: Votre mot de passe doit faire au moins {{ limit }} caractères

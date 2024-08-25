@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Connexion{% endblock %}
+
+{% block body %}
+    <section class="h-100 gradient-form" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-10">
+                    <div class="card rounded-3 text-black">
+                        <div class="row g-0">
+                            <div class="col-lg-6">
+                                <div class="card-body p-md-5 mx-md-4">
+
+                                    <div class="text-center">
+                                        <h4 class="mt-1 mb-2 pb-1">O.do.P</h4>
+                                        <h5 class=" mb-3 pb-1">{{ 'login.title' | trans }}</h5>
+                                        {% if app.user %}
+                                            <h6>OK connecté</h6>
+                                        {% endif %}
+                                    </div>
+                                    <form action="{{ path('app_login') }}"
+                                          method="post">
+                                        {% if error %}
+                                            <div class="alert alert-danger ">
+                                                <div style="text-align: center">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                            </div>
+                                        {% endif %}
+                                        <div class="form-outline mb-4">
+                                            <label for="username">{{ 'login.email' | trans }}</label>
+                                            <input type="email" value="{{ last_username }}"
+                                                   name="_username" id="username"
+                                                   class="form-control"
+                                                   required>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <label for="password">{{ 'login.password' | trans }}</label>
+                                            <input type="password"
+                                                   name="_password"
+                                                   id="password" class="form-control" autocomplete="password"
+                                                   required>
+                                            <p><a href="{{ path('app_forgot_password_request') }}" class="link-underline-primary">{{ 'login.password_forget' | trans }}</a></p>
+                                        </div>
+                                        <input type="hidden" name="_token" value="{{ csrf_token('authenticate') }}">
+                                        <div>
+                                            <button class="btn btn-primary btn-block mb-4" type="submit">
+                                                {{ 'login.login_in' | trans }}
+                                            </button>
+                                            <a class="btn btn-secondary btn-block mb-4"
+                                               href="{{ path('app_register') }}"> {{ 'register.sign_up' | trans }}</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            {{ include('public_template/login_register_img.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

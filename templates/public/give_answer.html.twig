@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'give_answer.title' | trans }}{% endblock %}
+
+{% block body %}
+    <style>
+        .gdas-range {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 4px;
+            outline: none;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+            margin-left: -15%;
+        }
+
+        .gdas-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #ddd;
+            border: 3px solid transparent;
+            border-radius: 50%;
+            cursor: pointer;
+            background-attachment: fixed, fixed;
+            background-clip: padding-box, border-box;
+        }
+
+        .gdas-range::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #ddd;
+            border: 3px solid transparent;
+            border-radius: 50%;
+            cursor: pointer;
+            background-attachment: fixed, fixed;
+            background-clip: padding-box, border-box;
+        }
+    </style>
+    <div class="container mt-xl-5 pt-2">
+        <div class="row">
+            <div class="col-md-6 offset-md-4 d-flex flex-column">
+                <h1>{{ 'give_answer.title' | trans }}</h1>
+                <form class="mt-xxl-5" action="{{ path('app_survey_answer_response', {'token' : token}) }}" method="post">
+                    {% for answer in answers %}
+                        {% if answer.question == 1 %}
+                            <div class="mt-xxl-5">
+                                <h3>
+                                    {{ get_title_bloc_from_template(answer.bloc) }}
+                                </h3>
+                            </div>
+                        {% endif %}
+                        <div class="form-group mt-lg-5">
+                            <label for="questionRange[{{ answer.bloc }}][{{ answer.question }}]" class="form-label"
+                                   style="display: block;">
+                                <h4>{{ get_question_from_template(answer.bloc, answer.question) }}</h4>
+                            </label>
+                            <input type="range"
+                                   class="form-control-range gdas-range"
+                                   min="{{ config[constant('App\\Twig\\Runtime\\GiveAnswerExtensionRuntime::CONFIG_MIN_RATE_KEY')] }}"
+                                   max="{{ config[constant('App\\Twig\\Runtime\\GiveAnswerExtensionRuntime::CONFIG_MAX_RATE_KEY')]  }}"
+                                   step="{{ config[constant('App\\Twig\\Runtime\\GiveAnswerExtensionRuntime::CONFIG_STEP_RATE_KEY')]  }}"
+                                   name="response[{{ answer.bloc }}][{{ answer.question }}]"
+                                   style="background-image:
+                                           linear-gradient(to right,
+                                   {{ config[constant('App\\Twig\\Runtime\\GiveAnswerExtensionRuntime::CONFIG_COLOR_BAD_KEY')] }} {{ config[constant('App\\Twig\\Runtime\\GiveAnswerExtensionRuntime::CONFIG_AVERAGE_BAD_KEY')] }}%,
+                                   {{ config[constant('App\\Twig\\Runtime\\GiveAnswerExtensionRuntime::CONFIG_COLOR_MID_KEY')] }} ,
+                                   {{ config[constant('App\\Twig\\Runtime\\GiveAnswerExtensionRuntime::CONFIG_COLOR_HIGH_KEY')] }});"
+                                   value="0" id="questionRange[{{ answer.bloc }}][{{ answer.question }}] "
+                                   oninput="this.nextElementSibling.value = this.value">
+                            <output>0</output>
+                        </div>
+                    {% endfor %}
+                    <div class="form-group mt-xxl-5">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,204 @@
+core:
+  title: O.do.P
+  now: Maintenant
+  notif: Notification
+  button:
+    back: Retour
+notification:
+  text: Notification
+  success: Succès
+  error: Erreur
+  warning: Attention
+  Info: Information
+login:
+  title: Connexion
+  email: "Email :"
+  password: "Mot de passe :"
+  login_in: Connexion
+  password_forget: Mot de passe oublié ?
+register:
+  title: Inscription
+  sign_up: S'inscrire
+  email: "Email :"
+  password: "Mot de passe :"
+  password_conf: "Confirmation du mot de passe :"
+  password_blank: Merci de saisir un mot de passe
+  login_up: Inscription
+  success_valid: Votre inscription est maintenant terminée. Merci de confirmer votre email.
+  confirm_subject: Merci de confirmer votre email
+  error_email: Impossible d'envoyer le mail de confirmation
+  term: Accepter les conditions d'utilisations
+  verify_email:
+    success: "Votre compte à bien été confirmer. Vous pouvez vous connecter."
+    error: "Une erreur subsiste, merci de contacter l'administrateur."
+reset_password:
+  title: Mot de passe oublié
+  email: "Email :"
+  info: "Entrer votre adresse email, un lien vous sera envoyé"
+  send: Envoyer
+  new_password: "Nouveau mot de passe : "
+  new_password_conf: "Confirmation du nouveau mot de passe : "
+  button: "Réinitialiser votre mot de passe"
+  conf: "Votre mot de passe à été mis à jour. Vous pouvez vous connecter"
+reset_password_email:
+  title: Email de ré-initialisation envoyé
+  info: "S'il existe un compte correspondant à votre adresse électronique, c'est qu'un courriel vient d'être envoyé qui contient un lien que vous pouvez utiliser pour réinitialiser votre mot de passe. Ce lien expirera dans une heure."
+  info_retry: "Si vous ne recevez pas d'e-mail, vérifiez votre dossier spam"
+  info_retry_link: "ou réessayez."
+secure_base:
+  logout: Déconnexion
+  profile: Mon profil
+  admin: Administration
+show_user:
+  title: Information de l'utilisateur
+  email: Email
+  first_name: Prénom
+  last_name: Nom
+  company_name: Société
+  user_type: Type d'utilisateur
+  is_verified: Est vérifié ?
+edit_user:
+  title: Modification de l'utilisateur
+  logo_url: URL du logo
+  access_admin: Accès Admin.
+  access_admin_info: Cela permet à l'administrateur, de voir le contenu de votre profil durant 1 heure.
+dashboard:
+  survey_tab:
+    title: Enquêtes
+    tab_header:
+      title: Titre
+      date: Date
+      rate: Taux de réponse
+      status: Status
+      created_by: Créer par
+      actions: Actions
+      action:
+        see: Voir
+        cancel: Annuler
+      status_data:
+        new: Nouveau
+        confirm: Confirmée
+        idle: Prête
+        ongoing: En cours
+        over: Terminée
+        cancel: Annulée
+        manager_asked: En attente
+    line_action:
+      view: Voir
+      delete: Supprimer
+  survey_modal:
+    button: Faire une demande
+    title: Demande d'enquête
+    name: Titre de l'enquête
+    number: Nombre de cible
+    close: Fermer
+    submit: Créer ma demande
+    confirm: 'Votre demande à été envoyée.'
+survey_show:
+  title: Information sur l'enquête
+  creator: Créée par
+  count: Nombre de cible
+  status: Etat
+  created_at: Créée le
+  accepted: Accepter la demande
+  refused: Refuser la demande
+  flash: Le choix à été pris en compte
+  cible_form:
+    title: Choix des cibles
+    info_creator: L'adresse peut-être modifié a la convenance
+    email: Email
+    type: Type de cible
+    manager: Manager
+    salary: Equipier
+    info_cible: "Nombre de cible(s) à ajoutée(s) restante(s):"
+    add_cible: "Ajouter une cible"
+    modal:
+      title: Confirmer le choix des cibles
+      question:  Êtes vous certains de confirmer la liste des cibles saisies ?
+      warning: Aucun retour en arrière possible !
+      yes: Oui
+      no: Non
+  confirm: Les cibles ont notifiés de l'enquête
+  see_result: Voir le résultat
+  give_answer: Répondre à l'enquête
+give_answer:
+  title: Formulaire d'enquête
+  submit: Valider mes réponses
+confirm_answer:
+  title: Confirmation de vos réponses
+  body:
+    title: Merci d'avoir participé a l'enquête !
+    paraph: Votre avis est précieux. L'email utilisé à été supprimé de notre base de données, afin de garantir votre anonymat.
+survey_result:
+  title: Résultat
+  info_not_over: Les résultats présentés ne sont que temporaires. Ils ne représentes les réponses transmis par les cibles ayant déjà repondu. Ils peuvent être ammener à évoluer.
+email:
+  register:
+    title: "Confirmation de votre inscription."
+    header: "Bonjour ! Bienvenue sur O.do.P"
+    body:
+      1: "Merci de confirmer votre e-mail, en cliquant sur le lien ci-dessous : <br><br>"
+      button: "Confirmer mon e-mail"
+      2: "Le lien expirera dans : "
+  forgot_password:
+    title: "Renouvellement de votre mot de passe"
+    header: "Renouvellement de votre mot de passe"
+    body:
+      1: "Bonjour, <br>Merci de cliquer sur le lien ci-dessous : <br><br>"
+      button: "Changer mon mot de passe"
+      2: "Le lien expirera dans : "
+  survey_request:
+    title: "Portez votre voix !"
+    header: "Votre retour est important pour nous."
+    body:
+      1: "Un questionnaire, dont vous êtes la cible, à été ouvert par : "
+      button: "Répondre au questionnaire"
+      2: "Votre opinion est extrêmement précieuse pour nous, et chaque réponse aidera à comprendre mieux vos préférences et à identifier les domaines où nous pouvons nous améliorer.<br/><br/>Nous comprenons que votre temps est précieux, c'est pourquoi nous avons fait tout notre possible pour que l'enquête soit à la fois concise et significative.<br/><br/>Cette enquête est 100 % anonyme. Nous respectons votre vie privée et nous nous engageons à ne conserver aucune information personnelle. Notre objectif est simplement de recueillir des informations honnêtes et constructives pour nous aider à évoluer de la meilleure façon possible.<br/><br/>Nous vous remercions par avance pour votre temps et votre participation. Vos retours contribueront à améliorer nos produits et services pour l'ensemble de la communauté.<br/><br/>Cordialement, O.do.P"
+  survey_request_confirm:
+    title: "Votre participation compte !"
+    header: "Merci pour votre retour"
+    body:
+      1: "Nous souhaitons vous adresser nos sincères remerciements pour avoir pris le temps de participer à notre enquête. Chaque réponse est précieuse et contribue grandement à l'amélioration de notre travail.<br/><br/>L'information que vous avez fournie nous aide à comprendre mieux vos besoins et attentes. Soyez assuré(e) que nous allons analyser attentivement vos réponses pour améliorer nos produits et services.<br/><br/>Nous savons que votre temps est précieux et nous apprécions vraiment l'effort que vous avez investi en partageant votre avis.<br/><br/>Encore une fois, merci pour votre participation et pour votre aide à rendre notre travail mieux adapté à nos utilisateurs.<br/><br/>Cordialement, O.do.P"
+  survey_request_delete:
+    title: "L'enquête s'est conclue."
+    header: "Votre avis nous a manqué !"
+    body:
+      1: "Nous saluons votre intérêt pour notre travail et nous tenions à vous informer que notre dernière enquête est à présent terminée.<br/><br/>Nous avons reçu de nombreuses réponses intéressantes et instructives, mais nous n'avons malheureusement pas eu l'occasion de recueillir la vôtre. Votre avis est très précieux pour nous et il contribue grandement à l'amélioration de nos produits et services.<br/><br/>Ne vous inquiétez pas si vous avez raté cette occasion, il y aura d'autres enquêtes à l'avenir. Nous espérons alors pouvoir compter sur votre participation.<br/><br/>Merci encore pour votre intérêt et votre soutien. Nous sommes impatients de pouvoir recueillir vos commentaires lors de nos prochaines initiatives.<br/><br/>Cordialement, O.do.P"
+pdf:
+  result:
+    client:
+      title: "Résultat de l'enquête "
+      header:
+        date: "Date de l'enquête : "
+      intro:
+        title: "Introduction"
+        data: "Ce rapport présente les résultats d'une enquête récente réalisée avec pour objectif principal de mieux comprendre le paysage actuel des relations entre les managers et les salariés au sein d'une organisation non spécifiée.<br/><br/>L'objectif de cette enquête était de recueillir des données précieuses à partir desquelles nous pourrions obtenir un aperçu de la dynamique actuelle entre les managers et leurs équipes au sein de l'organisation.<br/><br/>Les informations présentées dans ce rapport sont basées sur les réponses fournies par les participants à l'enquête. Elles offrent une vue d'ensemble des perceptions, des attitudes et des expériences observées en ce qui concerne les relations entre les managers et les salariés.<br/><br/>Dans ce rapport, nous fournirons une analyse détaillée des données recueillies, mettant en lumière les tendances et les thèmes clés qui se dégagent de l'enquête. L'objectif étant de comprendre les forces, les défis et les opportunités qui existent actuellement dans le contexte des relations de travail au sein de l'organisation.<br/><br/>Ce rapport vise à partager ces découvertes de manière transparente en vue de soutenir des discussions constructives et de faciliter la prise de décisions éclairées sur les futures orientations et initiatives possibles.<br/><br/>"
+      legend:
+        title: Légende
+      global_result:
+        title: Résultat global
+        title_tab: Récapitulatif
+        col_name_1: Bloc
+        col_name_2: Managers
+        col_name_3: Équipiers
+        col_name_4: Questions
+      graph:
+        title: Représentation visuelle
+        data: Les numéros affichés sur le graphiques, correspondes au numéro des questions.
+mt:
+  notif:
+    survey:
+      new:
+        title: "Demande d'enquête"
+        summary: "Description"
+        detail: "Détail de la demande"
+        creator: Créateur
+        licence: Nombre de license
+        survey_title: Titre de l'enquête
+      cancel:
+        title: "Annulation d'enquête"
+        summary: "Description"
+        detail: "Détail de la demande"
+        creator: Créateur
+        survey_title: Titre de l'enquête
+

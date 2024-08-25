@@ -1,0 +1,49 @@
+{% set currentBloc = null %}
+    {% set blocId = 1 %}
+
+    {% for managerAnswer in managerPoll %}
+        {% if managerAnswer.bloc != currentBloc %}
+            <div style="page-break-after: always;">
+                <div class="page">
+                    <h1>{{ get_bloc(managerAnswer.bloc) }}</h1>
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">{{ 'pdf.result.client.global_result.col_name_4' | trans }}</th>
+                            <th scope="col">{{ 'pdf.result.client.global_result.col_name_2' | trans }}</th>
+                            <th scope="col">{{ 'pdf.result.client.global_result.col_name_3' | trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for question in get_questions_for_bloc(managerPoll, managerAnswer.bloc) %}
+                            <tr>
+                                <td>{{ question.question }}</td>
+                                <td>{{ get_question(question.question, managerAnswer.bloc) }}</td>
+                                <td style="background: {{ get_color(question.response) }} !important;">{{ question.response }}</td>
+                                <td style="background: {{ get_color(get_salary_response(salaryPoll, managerAnswer.bloc, question.question)) }} !important;">{{ get_salary_response(salaryPoll, managerAnswer.bloc, question.question) }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div style="page-break-after: always;">
+                <div class="page">
+                    <h3>{{ get_bloc(managerAnswer.bloc) }} - {{ 'pdf.result.client.graph.title' | trans }}</h3>
+                    <br/>
+                    <i>{{ 'pdf.result.client.graph.data' | trans | raw }}</i>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div style="width: 100%; height: auto;">
+                        <img src="{{ data_chart_radar_by_bloc(managerPoll, salaryPoll,managerAnswer.bloc, 0) }}" srcset="{{ data_chart_radar_by_bloc(managerPoll, salaryPoll,managerAnswer.bloc, 1) }}" alt="Diagram Radar"/>
+                    </div>
+                </div>
+            </div>
+            {% set currentBloc = managerAnswer.bloc %}
+            {% set blocId = blocId + 1 %}
+        {% endif %}
+    {% endfor %}

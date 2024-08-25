@@ -1,0 +1,14 @@
+{% extends 'email/email_template.html.twig' %}
+
+{% block email_title %}
+    Bienvenue {{ name }}!
+{% endblock %}
+
+{% block email_header %}
+    Bienvenue sur O.do.P, {{ name }}!
+{% endblock %}
+
+{% block email_content %}
+    <p>Merci de vous être inscrit! Pour activer votre compte, veuillez cliquer sur le bouton ci-dessous:</p>
+    <a href="#" class="button">Activer le Compte</a>
+{% endblock %}

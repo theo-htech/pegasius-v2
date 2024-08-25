@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block title %} {{ parent() }} - Erreur 400{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-center align-items-center vh-100">
+        <div class="text-center"><h1>Erreur 400 - Requête incorrecte.</h1>
+            <p>La requête n’a pas pu être comprise par le serveur en raison d’une syntaxe mal formée.</p> <a
+                    href="{{ path('app_dashboard') }}" class="btn btn-primary">Retour à l'accueil</a></div>
+    </div>
+{% endblock %}

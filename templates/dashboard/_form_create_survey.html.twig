@@ -1,0 +1,36 @@
+<!-- Bouton déclencheur de la modale -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createSurveyModal">
+    {{ 'dashboard.survey_modal.button' | trans }}
+</button>
+
+<!-- Modale -->
+<div class="modal fade" id="createSurveyModal" tabindex="-1" aria-labelledby="createSurveyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createSurveyModalLabel">{{ 'dashboard.survey_modal.title' | trans }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulaire -->
+                <form method="post" action="{{ path('app_survey_new') }}">
+                    <div class="form-group">
+                        <label for="title">{{ 'dashboard.survey_modal.name' | trans }}</label>
+                        <input class="form-control" id="title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="number">{{ 'dashboard.survey_modal.number' | trans }}</label>
+                        <input type="number" class="form-control" id="number" name="number" required min="2" value="2">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">{{ 'dashboard.survey_modal.close' | trans }}</button>
+                        <button type="submit"
+                                class="btn btn-primary">{{ 'dashboard.survey_modal.submit' | trans }}</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

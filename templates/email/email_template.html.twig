@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block email_title %}Default Title{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+        .header {
+            background-color: #077295;
+            color: #fff;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            font-size: 20px;
+        }
+        .content {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 30px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #077295;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #122081;
+            transition: background-color 0.3s;
+        }
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 0 0 10px 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        {% block email_header %}{% endblock %}
+    </div>
+    <div class="content">
+        {% block email_content %}{% endblock %}
+    </div>
+    <div class="footer">
+        <p>© {{ "now" | date('Y') }} HORIZON TECH S.A.S. Tous les droits sont réservés.</p>
+        <p>Notre adresse : 78 Avenue des Champs Elysées, BUREAU 326, 75008 Paris, France</p>
+        <p>Contactez-nous : contact@horizon-tech.eu</p>
+        <p>{{ get_version_app() }}</p>
+    </div>
+</div>
+</body>
+</html>

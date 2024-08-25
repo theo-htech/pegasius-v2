@@ -1,0 +1,37 @@
+<div style="page-break-after: always;">
+    <div class="page">
+        <h1>{{ 'pdf.result.client.global_result.title' | trans }}</h1>
+        <img src="{{ data_chart_radar(managerPoll, salaryPoll, 0) }}" srcset="{{ data_chart_radar(managerPoll, salaryPoll, 1) }}" alt="Diagram Radar"/>
+        <br/>
+        <br/>
+        {% set currentBloc = null %}
+        {% set blocId = 1 %}
+
+        <h2 class="mt-5">{{ 'pdf.result.client.global_result.title_tab' | trans }}</h2>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">{{ 'pdf.result.client.global_result.col_name_1' | trans }}</th>
+                <th scope="col">{{ 'pdf.result.client.global_result.col_name_2' | trans }}</th>
+                <th scope="col">{{ 'pdf.result.client.global_result.col_name_3' | trans }}</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for managerAnswer in managerPoll %}
+                {% if managerAnswer.bloc != currentBloc %}
+                    <tr>
+                        <td>{{ blocId }}</td>
+                        <td>{{ get_bloc(managerAnswer.bloc) }}</td>
+                        <td style="background: {{ get_color(calculate_average_by_bloc(managerPoll, managerAnswer.bloc)) }} !important;">{{ calculate_average_by_bloc(managerPoll, managerAnswer.bloc) }}</td>
+                        <td style="background: {{ get_color(calculate_average_by_bloc(salaryPoll, managerAnswer.bloc)) }} !important;">{{ calculate_average_by_bloc(salaryPoll, managerAnswer.bloc) }}</td>
+                    </tr>
+                    {% set currentBloc = managerAnswer.bloc %}
+                    {% set blocId = blocId + 1 %}
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

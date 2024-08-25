@@ -1,0 +1,17 @@
+{% extends 'email/email_template.html.twig' %}
+
+{% block email_title %}
+    {{ 'email.register.title' | trans }}
+{% endblock %}
+
+{% block email_header %}
+    {{ 'email.register.header' | trans }}
+{% endblock %}
+
+{% block email_content %}
+    <p>
+        {{ 'email.register.body.1' | trans | raw }}
+        <a href="{{ signedUrl|raw }}" class="button">{{ 'email.register.body.button' | trans }}</a><br>
+        {{ 'email.register.body.2' | trans }}  {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}
+    </p>
+{% endblock %}

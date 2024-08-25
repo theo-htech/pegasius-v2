@@ -1,0 +1,15 @@
+{% extends 'email/email_template.html.twig' %}
+
+{% block email_title %}
+    {{ 'email.survey_request_delete.title' | trans }}
+{% endblock %}
+
+{% block email_header %}
+    {{ 'email.survey_request_delete.header' | trans }}
+{% endblock %}
+
+{% block email_content %}
+    <p>
+        {{ 'email.survey_request_delete.body.1' | trans  | raw }}
+    </p>
+{% endblock %}

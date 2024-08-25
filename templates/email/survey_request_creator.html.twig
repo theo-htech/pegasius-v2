@@ -1,0 +1,17 @@
+{% extends 'email/email_template.html.twig' %}
+
+{% block email_title %}
+    {{ 'email.survey_request.title' | trans }}
+{% endblock %}
+
+{% block email_header %}
+    {{ 'email.survey_request.header' | trans }}
+{% endblock %}
+
+{% block email_content %}
+    <p>
+        {{ 'email.survey_request.body.1' | trans  }} {{ user_display(creator) }}<br/>
+        <a class="button" href="{{ url('app_secure_survey_answer', {token: requestToken}) }}">{{ 'email.survey_request.body.button' | trans }}</a><br/><br/>
+        {{ 'email.survey_request.body.2' | trans | raw}}
+    </p>
+{% endblock %}

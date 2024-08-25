@@ -1,0 +1,36 @@
+{% set currentBloc = null %}
+    {% set blocId = 1 %}
+    {% for managerAnswer in managerPoll %}
+        {% if managerAnswer.bloc != currentBloc %}
+            {% if currentBloc != null %}
+                </tbody></table></div></div> <!-- Correct the closing tags here -->
+            {% endif %}
+<h2 class="mt-5">
+    <a data-bs-toggle="collapse" href="#bloc{{ blocId }}" role="button" aria-expanded="false">
+        {{ get_bloc(managerAnswer.bloc) }}
+    </a>
+</h2>
+<div class="collapse" id="bloc{{ blocId }}">
+    <div class="card card-body">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Question</th>
+                <th scope="col">Manager</th>
+                <th scope="col">Equipier</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% endif %}
+            <tr>
+                <td>{{ get_question(managerAnswer.question, managerAnswer.bloc) }}</td>
+                <td style="background: {{ get_color(managerAnswer.response) }} !important;">{{ managerAnswer.response }}</td>
+                <td style="background: {{ get_color(get_salary_response(salaryPoll, managerAnswer.bloc, managerAnswer.question)) }} !important;">{{ get_salary_response(salaryPoll, managerAnswer.bloc, managerAnswer.question) }}</td>
+            </tr>
+            {% set currentBloc = managerAnswer.bloc %}
+            {% set blocId = blocId + 1 %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

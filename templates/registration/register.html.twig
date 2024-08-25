@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Inscription{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <section class="h-100 gradient-form" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-10">
+                    <div class="card rounded-3 text-black">
+                        <div class="row g-0">
+                            <div class="col-lg-6">
+                                <div class="card-body p-md-5 mx-md-4">
+
+                                    <div class="text-center">
+                                        <h4 class="mt-1 mb-2 pb-1">O.do.P</h4>
+                                        <h5 class="mb-2 pb-1">{{ 'register.title' | trans }}</h5>
+                                    </div>
+                                    {{ form_start(registrationForm) }}
+                                    {% if not registrationForm.vars.valid %}
+                                        <div class="alert alert-danger list-error">
+                                            {{ form_errors(registrationForm) }}
+                                        </div>
+                                    {% endif %}
+                                    <div class="form-outline mb-4">
+                                        <label for="inputEmail">{{ field_label(registrationForm.email) }}</label>
+                                        <input type="email" value="{{ field_value(registrationForm.email) }}"
+                                               name="{{ field_name(registrationForm.email) }}" id="inputEmail"
+                                               class="form-control"
+                                               required>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label for="inputPassword.first">{{ field_label(registrationForm.plainPassword.first) }}</label>
+                                        <input type="password"
+                                               value="{{ field_value(registrationForm.plainPassword.first) }}"
+                                               name="{{ field_name(registrationForm.plainPassword.first) }}"
+                                               id="inputPassword.first" class="form-control" autocomplete="password"
+                                               required>
+
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label for="inputPassword.second">{{ field_label(registrationForm.plainPassword.second) }}</label>
+                                        <input type="password"
+                                               value="{{ field_value(registrationForm.plainPassword.second) }}"
+                                               name="{{ field_name(registrationForm.plainPassword.second) }}"
+                                               id="inputPassword.second" class="form-control" autocomplete="password"
+                                               required>
+                                    </div>
+
+                                    <div class="form-check form-outline mb-4">
+                                        <input class="form-check-input form-control" type="checkbox"
+                                               value="{{ field_value(registrationForm.agreeTerms) }}"
+                                               name="{{ field_name(registrationForm.agreeTerms) }}" id="inputTerm"
+                                               required>
+                                        <label for="inputTerm"
+                                               class="form-check-label ms-2">{{ field_label(registrationForm.agreeTerms) }}</label>
+                                    </div>
+
+                                    <div>
+                                        <button class="btn btn-primary btn-block mb-4" type="submit">
+                                            {{ 'register.sign_up' | trans }}
+                                        </button>
+                                        <a class="btn btn-secondary btn-block mb-4"
+                                           href="{{ path('app_login') }}">{{ 'login.login_in' | trans }}</a>
+                                    </div>
+
+                                    {{ form_end(registrationForm) }}
+                                </div>
+                            </div>
+                            {{ include('public_template/login_register_img.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

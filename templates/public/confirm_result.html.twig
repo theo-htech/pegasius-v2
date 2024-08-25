@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - {{ 'confirm_answer.title' | trans }}
+{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-center align-items-center vh-100">
+        <div class="text-center">
+            <h2>{{ 'confirm_answer.body.title' | trans }}</h2>
+            <p>{{ 'confirm_answer.body.paraph' | trans }}</p>
+        </div>
+    </div>
+{% endblock %}
